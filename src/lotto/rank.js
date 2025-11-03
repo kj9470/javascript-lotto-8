@@ -9,3 +9,12 @@ export const Rank = Object.freeze({
   THREE: { prize: 5000, label: "3개 일치 (5,000원)" },
   MISS: { prize: 0, label: "" },
 });
+
+export function judgeRank(matchCount, bonusMatched) {
+  if (matchCount === 6) return Rank.SIX;
+  if (matchCount === 5 && bonusMatched) return Rank.FIVE_BONUS;
+  if (matchCount === 5) return Rank.FIVE;
+  if (matchCount === 4) return Rank.FOUR;
+  if (matchCount === 3) return Rank.THREE;
+  return Rank.MISS;
+}
