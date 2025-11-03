@@ -19,7 +19,9 @@ class App {
   #issueTickets(money) {
     const count = money / 1000;
     const make = () => {
-      const nums = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const nums = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+        (a, b) => a - b
+      );
       return new Lotto(nums);
     };
     return Array.from({ length: count }, make);
