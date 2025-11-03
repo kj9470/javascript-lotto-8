@@ -10,3 +10,7 @@ export function printNumber(ticketCount, tickets) {
     Console.print(`[${number.getNumbers().join(", ")}]`);
   });
 }
+
+export function printError(error) {
+  Console.print(error.message);
+}
