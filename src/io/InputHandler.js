@@ -11,3 +11,9 @@ export async function numbersInput() {
   const numbersLine = await Console.readLineAsync("");
   return numbersLine;
 }
+
+export async function bonusNumberInput() {
+  Console.print("보너스 번호를 입력해 주세요.");
+  const bonusNumberLine = await Console.readLineAsync("");
+  return bonusNumberLine;
+}

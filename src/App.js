@@ -1,4 +1,8 @@
-import { amountInput, numbersInput } from "./io/inputHandler.js";
+import {
+  amountInput,
+  numbersInput,
+  bonusNumberInput,
+} from "./io/inputHandler.js";
 import { printError, printNumber } from "./io/outputHandler.js";
 import { validationAmount, validationLottoNumbers } from "./lotto/Validator.js";
 import { Random } from "@woowacourse/mission-utils";
@@ -15,6 +19,7 @@ class App {
       const winningLine = await numbersInput();
       const winningNumbers = parseNumbersInput(winningLine);
       validationLottoNumbers(winningNumbers);
+      const bonusLine = await bonusNumberInput();
     } catch (error) {
       printError(error);
     }
