@@ -3,17 +3,22 @@ import {
   numbersInput,
   bonusNumberInput,
 } from "./io/inputHandler.js";
-import { printError, printNumber } from "./io/outputHandler.js";
+import {
+  printError,
+  printNumber,
+  printWinningStatistics,
+} from "./io/outputHandler.js";
 import {
   validationAmount,
   validationBonusNumber,
   validationLottoNumbers,
 } from "./lotto/Validator.js";
 import { Random } from "@woowacourse/mission-utils";
-import Lotto from "./lotto/Lotto.js";
+import Lotto from "./Lotto.js";
 import { parseNumbersInput } from "./lotto/Parser.js";
 import { evaluateAll } from "./lotto/Evaluate.js";
 import Winning from "./lotto/Winning.js";
+import { profitRate } from "./lotto/Profit.js";
 
 class App {
   async run() {
@@ -29,6 +34,8 @@ class App {
       const bonusNumber = validationBonusNumber(bonusLine, winningNumbers);
       const winning = new Winning(winningNumbers, bonusNumber);
       const result = evaluateAll(tickets, winning);
+      const rate = profitRate(result.totalPrize, amount);
+      this.#printStats(result.counts, rate);
     } catch (error) {
       printError(error);
     }
@@ -43,6 +50,11 @@ class App {
       return new Lotto(nums);
     };
     return Array.from({ length: count }, make);
+  }
+
+  #printStats(counts, rate) {
+    const counter = Array.from(counts.entries()).filter(([rank]) => rank.label);
+    printWinningStatistics(counter, rate);
   }
 }
 

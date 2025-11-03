@@ -11,6 +11,15 @@ export function printNumber(ticketCount, tickets) {
   });
 }
 
+export function printWinningStatistics(counter, rate) {
+  Console.print("당첨 통계");
+  Console.print("---");
+  counter.forEach(([rank, count]) => {
+    Console.print(`${rank.label} - ${count}개`);
+  });
+  Console.print(`총 수익률은 ${rate}%입니다.`);
+}
+
 export function printError(error) {
   Console.print(error.message);
 }
