@@ -20,6 +20,8 @@ import { evaluateAll } from "./lotto/Evaluate.js";
 import Winning from "./lotto/Winning.js";
 import { profitRate } from "./lotto/Profit.js";
 
+const PRICE_PER_TICKET = 1000;
+
 class App {
   async run() {
     try {
@@ -54,7 +56,7 @@ class App {
   }
 
   #issueTickets(money) {
-    const count = money / 1000;
+    const count = money / PRICE_PER_TICKET;
     const make = () => {
       const nums = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
         (a, b) => a - b
