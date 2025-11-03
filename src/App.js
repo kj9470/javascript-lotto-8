@@ -4,7 +4,11 @@ import {
   bonusNumberInput,
 } from "./io/inputHandler.js";
 import { printError, printNumber } from "./io/outputHandler.js";
-import { validationAmount, validationLottoNumbers } from "./lotto/Validator.js";
+import {
+  validationAmount,
+  validationBonusNumber,
+  validationLottoNumbers,
+} from "./lotto/Validator.js";
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "./lotto/Lotto.js";
 import { parseNumbersInput } from "./lotto/Parser.js";
@@ -20,6 +24,7 @@ class App {
       const winningNumbers = parseNumbersInput(winningLine);
       validationLottoNumbers(winningNumbers);
       const bonusLine = await bonusNumberInput();
+      validationBonusNumber(bonusLine, winningNumbers);
     } catch (error) {
       printError(error);
     }
