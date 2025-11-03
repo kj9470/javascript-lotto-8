@@ -5,6 +5,7 @@ class App {
   async run() {
     const amountLine = amountInput();
     const amount = validationAmount(amountLine);
+    const ticketCount = amount / 1000;
   }
 }
 
