@@ -11,6 +11,7 @@ class App {
       const amount = validationAmount(amountLine);
       const tickets = this.#issueTickets(amount);
       printNumber(tickets.length, tickets);
+      const winningLine = await umbersInput();
     } catch (error) {
       printError(error);
     }
