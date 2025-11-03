@@ -2,12 +2,12 @@ import {
   amountInput,
   numbersInput,
   bonusNumberInput,
-} from "./io/inputHandler.js";
+} from "./io/InputHandler.js";
 import {
   printError,
   printNumber,
   printWinningStatistics,
-} from "./io/outputHandler.js";
+} from "./io/OutputHandler.js";
 import {
   validationAmount,
   validationBonusNumber,
