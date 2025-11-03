@@ -4,6 +4,10 @@
  */
 
 export function parseNumbersInput(numbersLine) {
-  const numbers = numbersLine.split(",").map((n) => Number(n.trim()));
-  return numbers;
+  return numbersLine
+    .split(",")
+    .map((n) => n.trim())
+    .filter((n) => n !== "")
+    .map((n) => Number(n))
+    .filter((n) => !Number.isNaN(n));
 }
