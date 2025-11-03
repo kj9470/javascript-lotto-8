@@ -1,8 +1,9 @@
-import { amountInput } from "./io/inputHandler.js";
+import { amountInput, numbersInput } from "./io/inputHandler.js";
 import { printError, printNumber } from "./io/outputHandler.js";
-import { validationAmount } from "./lotto/Validator.js";
+import { validationAmount, validationLottoNumbers } from "./lotto/Validator.js";
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "./lotto/Lotto.js";
+import { parseNumbersInput } from "./lotto/Parser.js";
 
 class App {
   async run() {
@@ -11,7 +12,9 @@ class App {
       const amount = validationAmount(amountLine);
       const tickets = this.#issueTickets(amount);
       printNumber(tickets.length, tickets);
-      const winningLine = await umbersInput();
+      const winningLine = await numbersInput();
+      const winningNumbers = parseNumbersInput(winningLine);
+      validationLottoNumbers(winningNumbers);
     } catch (error) {
       printError(error);
     }
