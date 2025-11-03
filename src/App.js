@@ -12,6 +12,8 @@ import {
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "./lotto/Lotto.js";
 import { parseNumbersInput } from "./lotto/Parser.js";
+import { evaluateAll } from "./lotto/Evaluate.js";
+import Winning from "./lotto/Winning.js";
 
 class App {
   async run() {
@@ -24,7 +26,9 @@ class App {
       const winningNumbers = parseNumbersInput(winningLine);
       validationLottoNumbers(winningNumbers);
       const bonusLine = await bonusNumberInput();
-      validationBonusNumber(bonusLine, winningNumbers);
+      const bonusNumber = validationBonusNumber(bonusLine, winningNumbers);
+      const winning = new Winning(winningNumbers, bonusNumber);
+      const result = evaluateAll(tickets, winning);
     } catch (error) {
       printError(error);
     }
