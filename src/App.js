@@ -23,22 +23,34 @@ import { profitRate } from "./lotto/Profit.js";
 class App {
   async run() {
     try {
-      const amountLine = await amountInput();
-      const amount = validationAmount(amountLine);
+      const amount = await this.#readAmount();
       const tickets = this.#issueTickets(amount);
       printNumber(tickets.length, tickets);
-      const winningLine = await numbersInput();
-      const winningNumbers = parseNumbersInput(winningLine);
-      validationLottoNumbers(winningNumbers);
-      const bonusLine = await bonusNumberInput();
-      const bonusNumber = validationBonusNumber(bonusLine, winningNumbers);
-      const winning = new Winning(winningNumbers, bonusNumber);
+
+      const winning = await this.#readWinning();
       const result = evaluateAll(tickets, winning);
       const rate = profitRate(result.totalPrize, amount);
       this.#printStats(result.counts, rate);
     } catch (error) {
       printError(error);
     }
+  }
+
+  async #readAmount() {
+    const amountLine = await amountInput();
+    const amount = validationAmount(amountLine);
+    return amount;
+  }
+
+  async #readWinning() {
+    const winningLine = await numbersInput();
+    const winningNumbers = parseNumbersInput(winningLine);
+    validationLottoNumbers(winningNumbers);
+
+    const bonusLine = await bonusNumberInput();
+    const bonusNumber = validationBonusNumber(bonusLine, winningNumbers);
+
+    return new Winning(winningNumbers, bonusNumber);
   }
 
   #issueTickets(money) {
